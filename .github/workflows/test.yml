@@ -1,0 +1,48 @@
+name: Formula installation and upgrade
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Focused installation dry-run runner
+        type: choice
+        default: macos-15
+        options: [all, macos-15, macos-15-intel, ubuntu-24.04, ubuntu-24.04-arm]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: formula-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  installation:
+    name: Install and upgrade (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.runner != 'all' && format('["{0}"]', inputs.runner) || '["macos-15", "macos-15-intel", "ubuntu-24.04", "ubuntu-24.04-arm"]') }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+      HOMEBREW_NO_INSTALL_CLEANUP: '1'
+      HOMEBREW_NO_ANALYTICS: '1'
+    steps:
+      - name: Set up Homebrew and check out this revision
+        uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c
+        with:
+          stable: true
+      - name: Check scripts and Formula style
+        run: |
+          node --check scripts/verify-install.mjs
+          node --check scripts/test-upgrade.mjs
+          brew style Formula/open-science.rb
+      - name: Audit Formula
+        run: brew audit --strict --online aipoch/tap/open-science
+      - name: Install, verify, upgrade and uninstall with an isolated profile
+        run: node scripts/test-upgrade.mjs
