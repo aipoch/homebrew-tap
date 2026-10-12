@@ -55,9 +55,13 @@ class OpenScience < Formula
     bin.install_symlink libexec/"open-science"
   end
 
-  def post_install
-    originals = libexec/"signed-dylibs.tar.gz"
-    system "tar", "-xzf", originals, "-C", libexec if OS.mac? && originals.exist?
+  post_install_steps do
+    on_macos do
+      if_path_exists "signed-dylibs.tar.gz", base: :libexec do
+        run "/usr/bin/tar", args: ["-xzf", "{{libexec}}/signed-dylibs.tar.gz", "-C", "{{libexec}}"],
+                            writable_paths: ["."], writable_base: :libexec
+      end
+    end
   end
 
   def caveats

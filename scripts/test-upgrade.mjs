@@ -40,12 +40,14 @@ try {
   installedByTest = true
   brew(['install', '--formula', ...(skipLink ? ['--skip-link'] : []), 'aipoch/tap/open-science'])
   brew(['test', ...(skipLink ? ['--force'] : []), 'aipoch/tap/open-science'])
+  if (!skipLink) assert.equal(realpathSync(join(brew(['--prefix']), 'bin/open-science')), realpathSync(join(brew(['--prefix', 'aipoch/tap/open-science']), 'bin/open-science')))
   const project = await verifyInstall(brew(['--prefix', 'aipoch/tap/open-science']), profile, version)
   writeFileSync(join(profile, 'uninstall-marker.txt'), 'retain research data\n')
   writeFileSync(formulaPath, upgraded)
   // Install upgrades an outdated Formula and supports --skip-link; upgrade relinks it.
   brew(skipLink ? ['install', '--formula', '--skip-link', 'aipoch/tap/open-science'] : ['upgrade', '--formula', 'aipoch/tap/open-science'])
   brew(['test', ...(skipLink ? ['--force'] : []), 'aipoch/tap/open-science'])
+  if (!skipLink) assert.equal(realpathSync(join(brew(['--prefix']), 'bin/open-science')), realpathSync(join(brew(['--prefix', 'aipoch/tap/open-science']), 'bin/open-science')))
   const upgradedPrefix = brew(['--prefix', 'aipoch/tap/open-science'])
   assert.equal(basename(realpathSync(upgradedPrefix)), `${version}_${revision + 1}`)
   await verifyInstall(upgradedPrefix, profile, version, project)

@@ -25,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.runner != 'all' && format('["{0}"]', inputs.runner) || '["macos-15", "macos-15-intel", "ubuntu-24.04", "ubuntu-24.04-arm"]') }}
+        os: ${{ fromJSON(github.event_name == 'pull_request' && vars.FORMULA_DRY_RUN_RUNNER != '' && format('["{0}"]', vars.FORMULA_DRY_RUN_RUNNER) || github.event_name == 'workflow_dispatch' && inputs.runner != 'all' && format('["{0}"]', inputs.runner) || '["macos-15", "macos-15-intel", "ubuntu-24.04", "ubuntu-24.04-arm"]') }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     env:

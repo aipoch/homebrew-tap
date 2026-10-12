@@ -92,6 +92,9 @@ manage desktop updates or delete desktop/application profiles.
 CI tests real Brew installation, backend start/Web access/stop, project persistence
 through a Formula revision upgrade and uninstall data retention on macOS/Linux ARM64/x64. The manual
 workflow selects one runner for a focused dry-run and does not publish packages or releases.
+Before that workflow exists on the default branch, maintainers can temporarily set the
+repository variable `FORMULA_DRY_RUN_RUNNER` to one listed runner for PR debugging.
+Delete that variable and rerun the workflow to validate all four runners before merging.
 
 On macOS the Formula preserves upstream `@rpath` IDs and retains a compressed copy
 of dylibs with absolute IDs. Its post-install step restores those signed bytes after
