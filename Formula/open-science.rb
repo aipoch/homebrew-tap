@@ -4,7 +4,7 @@
 class OpenScience < Formula
   desc "Standalone AI research CLI and local Web UI"
   homepage "https://aipoch.com/open-science"
-  release_version = "0.37.1"
+  release_version = "1.0.1"
   license "Apache-2.0"
 
   livecheck do
@@ -14,23 +14,23 @@ class OpenScience < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-#{release_version}-darwin-arm64.tar.gz"
-      sha256 "65dd310b2c8d4b7d70a9e50959b1ab21f1e06a8dd2e8b7074169ffa0c23c7460"
+      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-darwin-arm64.tar.gz"
+      sha256 "45cb5f07180e164e8a885a91e401fa5ec8dd38cffebfd839d2ca056004c7c44b"
     end
     on_intel do
-      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-#{release_version}-darwin-x64.tar.gz"
-      sha256 "44c014f53f3c3d0a1c055e6b51b1084ee2051f05c47e6cd069a5ba182d752447"
+      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-darwin-x64.tar.gz"
+      sha256 "d469228adc74798282c3138bb997bf367a126bdb2faf4ae4bb31669b5a8cd6ea"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-#{release_version}-linux-arm64-gnu.tar.gz"
-      sha256 "9d190b929aec5939c15d746aae803ce5076b302879a97a7777001da3dd18bea0"
+      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-linux-arm64-gnu.tar.gz"
+      sha256 "01a153e5833fc305f61c361bd620974830917398bcfed37f4550b9f807098bf9"
     end
     on_intel do
-      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-#{release_version}-linux-x64-gnu.tar.gz"
-      sha256 "efb6b89c6d105478a2eefce22fb81e32d94127cdea756467105409b05a0aeddf"
+      url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-linux-x64-gnu.tar.gz"
+      sha256 "7f2889fb06e2fa4fe22994a5e25c6ab7ce39d4d750d499f9db4a24669906d95e"
     end
   end
 

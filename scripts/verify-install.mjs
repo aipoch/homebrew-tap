@@ -46,7 +46,7 @@ export async function verifyInstall(prefix, profile, expectedVersion, expectedPr
     writeFileSync(path, '#!/bin/sh\nexit 91\n')
     chmodSync(path, 0o755)
   }
-  const env = { ...process.env, OPEN_SCIENCE_CONFIG_ROOT: profile, OPEN_SCIENCE_WEB_PORT: '0', PATH: `${poison}:${process.env.PATH}` }
+  const env = { ...process.env, OPEN_SCIENCE_CONFIG_ROOT: profile, OPEN_SCIENCE_INSTALLATION_STATE_ROOT: join(profile, 'installations'), OPEN_SCIENCE_WEB_PORT: '0', PATH: `${poison}:${process.env.PATH}` }
   const launcher = join(prefix, 'bin/open-science')
   function cli(args, status = 0) {
     const result = spawnSync(launcher, args, { env, encoding: 'utf8', timeout: 90000 })
