@@ -4,7 +4,7 @@
 class OpenScience < Formula
   desc "Standalone AI research CLI and local Web UI"
   homepage "https://aipoch.com/open-science"
-  release_version = "1.0.7"
+  release_version = "1.0.8"
   license "Apache-2.0"
 
   livecheck do
@@ -15,22 +15,22 @@ class OpenScience < Formula
   on_macos do
     on_arm do
       url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-darwin-arm64.tar.gz"
-      sha256 "0cb6b2014241909cc60d09ab3047939d29423affc94b5099b5ff0acc4824f8e0"
+      sha256 "397bdb46e95c5af9e9c2e321a08c2c295ceed275cc82f074bbc6822da6a72867"
     end
     on_intel do
       url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-darwin-x64.tar.gz"
-      sha256 "ea3ec9512147001e32a6e3720eef5caf9aeadc2403c138f5246286233f3ffe79"
+      sha256 "6c60a6aae340172c381e13fb2cb4448d095b67a16b40fb8cf33dd20f028b2688"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-linux-arm64-gnu.tar.gz"
-      sha256 "f5308c72253fbe2fcb2deab72440b95b7f447e4f12b550ee9f68cb6e0d007538"
+      sha256 "7f04d68259fcda936455682d284527a7e21042951058a306fd055f6c1c57dae3"
     end
     on_intel do
       url "https://github.com/aipoch/open-science/releases/download/v#{release_version}/open-science-cli-#{release_version}-linux-x64-gnu.tar.gz"
-      sha256 "80fd601a38229a997d907a701b7c795704637f1c398504ba2d58091b5d8aae2e"
+      sha256 "acd93534237bf92859e783165868d4aa4d076df5767cd8ee60400b07fa06e718"
     end
   end
 
