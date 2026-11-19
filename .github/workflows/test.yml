@@ -32,6 +32,7 @@ jobs:
       HOMEBREW_NO_AUTO_UPDATE: '1'
       HOMEBREW_NO_INSTALL_CLEANUP: '1'
       HOMEBREW_NO_ANALYTICS: '1'
+      HOMEBREW_VERBOSE: '1'
     steps:
       - name: Set up Homebrew and check out this revision
         uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c
@@ -46,3 +47,8 @@ jobs:
         run: brew audit --strict --online aipoch/tap/open-science
       - name: Install, verify, upgrade and uninstall with an isolated profile
         run: node scripts/test-upgrade.mjs
+      - name: Print Homebrew diagnostics
+        if: always()
+        run: |
+          brew config
+          find "$HOME/Library/Logs/Homebrew/open-science" -type f -maxdepth 2 -print -exec tail -n 100 {} \; || true
