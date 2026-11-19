@@ -37,6 +37,11 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c
         with:
           stable: true
+      # Homebrew creates this prefix directory before running post-install steps.
+      # The Intel runner's /usr/local is root-owned, unlike the other prefixes.
+      - name: Prepare Homebrew post-install directory on Intel macOS
+        if: matrix.os == 'macos-15-intel'
+        run: sudo install -d -o "$(id -un)" -g "$(id -gn)" /usr/local/libexec
       - name: Check scripts and Formula style
         run: |
           node --check scripts/verify-install.mjs
